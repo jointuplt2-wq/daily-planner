@@ -1,9 +1,7 @@
 'use client'
 
 // Design Ref: §5.1 — 메인 플래너 페이지. 4섹션 + 날짜 네비게이션 조합
-import { useState } from 'react'
 import { useDateStore } from '@/store/useDateStore'
-import { useThemeStore, THEMES, ThemeKey } from '@/store/useThemeStore'
 import { useDailyEntry } from '@/features/daily-entry/hooks/useDailyEntry'
 import { useCarryOver } from '@/features/carry-over/hooks/useCarryOver'
 import { SectionCard } from '@/features/daily-entry/components/SectionCard'
@@ -27,9 +25,6 @@ function Skeleton() {
 
 export default function PlannerPage() {
   const router = useRouter()
-  const { theme, setTheme, isDark, toggleDark } = useThemeStore()
-  const t = THEMES[theme]
-  const [showThemePicker, setShowThemePicker] = useState(false)
 
   // Plan SC: FR-05 — 앱 오픈 시 자동 이월 실행
   useCarryOver()
@@ -57,10 +52,7 @@ export default function PlannerPage() {
         <header className="flex items-center justify-between py-5 border-b border-gray-100 dark:border-gray-700 mb-4">
           <div className="flex items-center gap-2">
             {/* 아이콘 */}
-            <div
-              className="w-7 h-7 rounded-lg flex items-center justify-center"
-              style={{ background: `linear-gradient(to bottom right, ${t.from}, ${t.to})` }}
-            >
+            <div className="w-7 h-7 rounded-lg flex items-center justify-center bg-gradient-to-br from-indigo-500 to-blue-500">
               <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
               </svg>
@@ -69,44 +61,6 @@ export default function PlannerPage() {
           </div>
           <div className="flex items-center gap-3">
             <DateNav />
-
-            {/* 다크모드 토글 */}
-            <button
-              onClick={toggleDark}
-              className="text-lg hover:scale-110 transition-transform"
-              title={isDark ? '라이트 모드' : '다크 모드'}
-            >
-              {isDark ? '☀️' : '🌙'}
-            </button>
-
-            {/* 테마 선택 버튼 */}
-            <div className="relative">
-              <button
-                onClick={() => setShowThemePicker(p => !p)}
-                className="text-lg hover:scale-110 transition-transform"
-                title="테마 변경"
-              >
-                🎨
-              </button>
-              {showThemePicker && (
-                <div className="absolute right-0 top-8 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 p-3 flex gap-2 z-10">
-                  {(Object.entries(THEMES) as [ThemeKey, typeof t][]).map(([key, th]) => (
-                    <button
-                      key={key}
-                      onClick={() => { setTheme(key); setShowThemePicker(false) }}
-                      className="w-6 h-6 rounded-full transition-transform hover:scale-110"
-                      style={{
-                        background: `linear-gradient(to bottom right, ${th.from}, ${th.to})`,
-                        outline: theme === key ? `2px solid ${th.dot}` : 'none',
-                        outlineOffset: '2px',
-                      }}
-                      title={th.label}
-                    />
-                  ))}
-                </div>
-              )}
-            </div>
-
             <button onClick={handleLogout} className="text-xs text-gray-400 hover:text-gray-600 transition-colors">로그아웃</button>
           </div>
         </header>

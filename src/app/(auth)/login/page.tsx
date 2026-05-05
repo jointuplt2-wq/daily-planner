@@ -3,8 +3,8 @@ import { LoginForm } from './LoginForm'
 
 export default function LoginPage() {
   return (
-    <main className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-indigo-50 via-white to-blue-50">
-      <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 w-full max-w-sm">
+    <main className="min-h-screen flex items-center justify-center px-4 bg-gray-900">
+      <div className="bg-gray-800 rounded-2xl shadow-lg border border-gray-700 p-8 w-full max-w-sm">
         {/* 로고 */}
         <div className="flex justify-center mb-6">
           <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-blue-500 flex items-center justify-center shadow-lg">
@@ -13,14 +13,14 @@ export default function LoginPage() {
             </svg>
           </div>
         </div>
-        <h1 className="text-2xl font-bold text-gray-900 mb-1 text-center">로그인</h1>
-        <p className="text-gray-500 text-sm mb-6 text-center">daily planner에 오신 것을 환영합니다</p>
+        <h1 className="text-2xl font-bold text-white mb-1 text-center">로그인</h1>
+        <p className="text-gray-400 text-sm mb-6 text-center">daily planner에 오신 것을 환영합니다</p>
 
         <LoginForm />
 
-        <p className="text-center text-sm text-gray-500 mt-6">
+        <p className="text-center text-sm text-gray-400 mt-6">
           계정이 없으신가요?{' '}
-          <Link href="/signup" className="text-blue-600 hover:underline font-medium">
+          <Link href="/signup" className="text-indigo-400 hover:underline font-medium">
             회원가입
           </Link>
         </p>
