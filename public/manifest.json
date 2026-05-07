@@ -2,7 +2,7 @@
   "name": "Daily Planner",
   "short_name": "Planner",
   "description": "오늘 할 일, 한 일, 내일 할 일, 반성을 기록하는 일일 플래너",
-  "start_url": "/planner",
+  "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#f9fafb",

@@ -38,7 +38,7 @@ export function DateNav() {
 
       <button
         onClick={openPicker}
-        className="px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg"
+        className="px-3 py-1.5 text-sm font-semibold text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
       >
         {formatDisplay(selectedDate)}
       </button>
