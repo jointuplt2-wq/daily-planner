@@ -1,11 +1,40 @@
+'use client'
+
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { auth } from '@/lib/firebase'
 import { LoginForm } from './LoginForm'
 
 export default function LoginPage() {
+  const router = useRouter()
+  const [checking, setChecking] = useState(true)
+
+  useEffect(() => {
+    const unsub = auth.onAuthStateChanged(async (user) => {
+      unsub()
+      if (user) {
+        const token = await user.getIdToken()
+        const maxAge = 60 * 60 * 24 * 30
+        document.cookie = `auth_token=${encodeURIComponent(token)}; path=/; max-age=${maxAge}; SameSite=Lax`
+        router.replace('/planner')
+      } else {
+        setChecking(false)
+      }
+    })
+  }, [router])
+
+  if (checking) {
+    return (
+      <main className="min-h-screen flex items-center justify-center bg-gray-900">
+        <div className="w-8 h-8 rounded-full border-2 border-indigo-500 border-t-transparent animate-spin" />
+      </main>
+    )
+  }
+
   return (
     <main className="min-h-screen flex items-center justify-center px-4 bg-gray-900">
       <div className="bg-gray-800 rounded-2xl shadow-lg border border-gray-700 p-8 w-full max-w-sm">
-        {/* 로고 */}
         <div className="flex justify-center mb-6">
           <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-blue-500 flex items-center justify-center shadow-lg">
             <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
